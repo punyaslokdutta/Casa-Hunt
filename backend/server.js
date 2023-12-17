@@ -1,26 +1,18 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import listingRouter from './routes/listing.route.js';
-import cookieParser from 'cookie-parser';
-import path from 'path';
+const express = require('express');
+const mongoose = require('mongoose');
+const { MongoMemoryServer } = require('mongodb-memory-server');
 
-
-
-
-const __dirname = path.resolve();
+var propertyRouter = require('../backend/routes/property.route.js')
 
 const app = express();
-
 app.use(express.json());
 
-app.use(cookieParser());
+app.use('/v1/properties', propertyRouter);
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000!');
 });
 
-
-app.use('/v1/listing', listingRouter);
 
 
 
