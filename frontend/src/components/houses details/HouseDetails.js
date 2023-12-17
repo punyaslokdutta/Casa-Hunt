@@ -7,6 +7,7 @@ import { AiOutlineRightCircle, AiOutlineRight } from 'react-icons/ai';
 import { fetchHouseById } from '../../Redux/Reducers/houseDetailsSlice';
 import './HouseDetails.scss';
 
+
 const HousesDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -21,32 +22,29 @@ const HousesDetails = () => {
       {house ? (
         <div className="detail-container">
           <div className="image">
-            <img src={house.image} alt={house.name} />
+            <img src={house.imageURL} alt={house.name} />
           </div>
           <div className="details">
-            <h5 className="name">{house.name}</h5>
+            <h5 className="name">{house.title}</h5>
             <div className="ulIcon">
               <ul>
                 <li className="first">
                   <p>City: </p>
-                  <p>{house.city}</p>
+                  <p>{house.location}</p>
                 </li>
                 <li className="first">
-                  <p>House ID: </p>
-                  <p>{house.id}</p>
-                </li>
-                <li className="first">
-                  <p>Daily Rent:</p>
+                  <p>Min Quote : </p>
                   <p>
                     $
-                    {house.appartment_fee}
+                    {house.price}
                   </p>
+                </li>
+                <li className="first">
+                  <p>{house.description}</p>
                 </li>
               </ul>
               <div className="iconColor">
                 <h4>
-                  DISCOVER MORE COLORS
-                  <AiOutlineRight />
                 </h4>
                 {/* <img src={icon} alt="icon" /> */}
               </div>
