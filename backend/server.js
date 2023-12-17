@@ -1,22 +1,43 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-
-var propertyRouter = require('../backend/routes/property.route.js')
+const generateMockProperties = require('./data/generateMockProperties');
+const Property = require('./models/property')
+const populateMockData = require('./data/populateMockData');
 
 const app = express();
 app.use(express.json());
 
-app.use('/v1/properties', propertyRouter);
+// MongoDB Memory Server setup
+const startServer = async () => {
+  const mongo = await MongoMemoryServer.create();
+  const uri = mongo.getUri();
+  
+  await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000!');
-});
+  console.log('Connected to MongoDB');
+  const mockProperties = generateMockProperties(20);
+  //mock data for memory db server
+  await populateMockData(mockProperties);
+
+  // routes
+  var propertyRouter = require('../backend/routes/property.route.js');
+  app.use('/v1/properties', propertyRouter);
+
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+};
+
+startServer().catch((error) => console.error('Error starting the server:', error));
 
 
 
 
-//error handling
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
