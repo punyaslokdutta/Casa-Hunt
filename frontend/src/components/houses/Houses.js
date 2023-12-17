@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './Houses.scss';
 import { fetchHouses } from '../../Redux/Reducers/houseSlice';
 
+
 const Houses = () => {
   const dispatch = useDispatch();
   const houses = useSelector((state) => state.houses.houses);
@@ -33,23 +34,22 @@ const Houses = () => {
     <section className="house-sec">
       <h2>Find your Dream Casa</h2>
       <h3 className="email">Please select your Dream House</h3>
-      <div className="points">.........................</div>
       {status === 'loading' && <div>Loading...</div>}
       {status === 'succeeded' && (
         <Swiper
           className="house-list"
           modules={[Navigation, A11y]}
-          spaceBetween={10}
+          spaceBetween={5}
           slidesPerView={isMobile ? 1 : 3}
           navigation
         >
           {
             houses.map((item) => (
-              <SwiperSlide className="list-items" key={item.id}>
+              <SwiperSlide className="list-items" key={item._id}>
                 <div className="houses-imgs">
-                  <img src={item.image} style={{ width: '70', height: '70' }} alt={item.name} />
+                <Link to={`${item._id}`}><img src={item.imageURL} alt={item.name} /></Link>
                 </div>
-                <h5 className={styles.name}><Link to={`${item.id}`}>{item.name}</Link></h5>
+                <h5 className={styles.name}><Link to={`${item._id}`}>{item.title}</Link></h5>
                 <div className="points">....................</div>
                 <p className="email">{item.description}</p>
               </SwiperSlide>

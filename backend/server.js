@@ -1,10 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const generateMockProperties = require('./data/generateMockProperties');
 const Property = require('./models/property')
 const populateMockData = require('./data/populateMockData');
+const mockProperties = require('./data/mockProperties')
 const cors = require('cors');
+
 
 const app = express();
 app.use(express.json());
@@ -21,7 +22,7 @@ const startServer = async () => {
   });
 
   console.log('Connected to MongoDB');
-  const mockProperties = generateMockProperties(20);
+  //const mockProperties = generateMockProperties(20);
   //mock data for memory db server
   await populateMockData(mockProperties);
 
