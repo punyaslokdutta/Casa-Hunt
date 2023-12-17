@@ -4,9 +4,11 @@ const { MongoMemoryServer } = require('mongodb-memory-server');
 const generateMockProperties = require('./data/generateMockProperties');
 const Property = require('./models/property')
 const populateMockData = require('./data/populateMockData');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // MongoDB Memory Server setup
 const startServer = async () => {
