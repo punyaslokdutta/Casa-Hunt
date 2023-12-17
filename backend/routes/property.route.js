@@ -7,6 +7,6 @@ var propertyController = require('../controllers/property.js');
 var router = express.Router();
 
 router.get('/:id', propertyController.getProperty);
-router.get('/', propertyController.getProperties);
+router.get('/', propertyController.searchOrGetProperties);
 
 module.exports = router;
