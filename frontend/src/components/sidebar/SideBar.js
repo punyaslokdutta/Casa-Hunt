@@ -7,6 +7,7 @@ import { TiSocialGooglePlus } from 'react-icons/ti';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../Redux/Reducers/authSlice';
+import Search from './Search';
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const SideBar = () => {
       </button> */}
       <div className="menu">
         <div className="logo">Casa-Hunt</div>
+        <Search/>
         <ul>
           {navLinks.map(({ url, name }) => (
             <li key={name}>

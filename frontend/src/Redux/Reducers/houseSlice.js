@@ -3,10 +3,19 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3000';
 
-export const fetchHouses = createAsyncThunk('houses/fetchProperties', async () => {
-  const response = await axios.get(`${BASE_URL}/v1/properties`);
+export const fetchHouses = createAsyncThunk('houses/fetchProperties', async (searchTerm) => {
+  try{
+    const url = searchTerm
+    ? `${BASE_URL}/v1/properties?searchTerm=${encodeURIComponent(searchTerm)}`
+    : `${BASE_URL}/v1/properties`;
+
+  const response = await axios.get(url);
   return response.data;
+  }
+  catch(err){console.log(err)};
+  
 });
+
 
 const housesSlice = createSlice({
   name: 'houses',
