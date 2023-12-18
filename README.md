@@ -37,7 +37,7 @@ This will serve endpoints at PORT : 3000
 1. Change directory to the backend folder:
    
    ```bash
-   cd backend
+   cd frontend
    npm install
    npm start
    ```
