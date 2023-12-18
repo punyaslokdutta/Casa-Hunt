@@ -1,7 +1,7 @@
 # Casa-Hunt
 Real Estate Data Management System
 
-
+<img width="1433" alt="Screenshot 2023-12-18 at 5 14 17 PM" src="https://github.com/punyaslokdutta/Casa-Hunt/assets/13198518/ea3ce355-8ea2-46ff-9a0e-c85e9bea1625">
 
 ## Frontend
 
