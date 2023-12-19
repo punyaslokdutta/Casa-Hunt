@@ -57,3 +57,32 @@ const searchProperties = async (searchTerm) => {
     throw error;
   }
 };
+
+exports.getOrFilterProperties = async (req, res, next) => {
+  try {
+    const searchTerm = req.query.searchTerm;
+    const maxPrice = req.query.maxPrice ? parseFloat(req.query.maxPrice) : null;
+
+    let filter = {};
+
+    if (searchTerm) {
+      filter.$text = { $search: searchTerm };
+    }
+
+    if (maxPrice !== null && !isNaN(maxPrice)) {
+      filter.price = { $lte: maxPrice };
+    }
+
+    const properties = await Property.find(filter)
+      .sort({
+        ...(searchTerm ? { score: { $meta: 'textScore' } } : {}),
+        ...(maxPrice !== null ? { price: -1 } : {}), // Sort by price in descending order
+      })
+      .exec();
+
+    res.status(200).json(properties);
+  } catch (error) {
+    console.error('Error:', error);
+    next(errorHandler(500, `Internal Server Error: ${error.message}`));
+  }
+};

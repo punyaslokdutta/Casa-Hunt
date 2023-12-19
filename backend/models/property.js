@@ -34,7 +34,9 @@ var propertySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-propertySchema.index({ title: 'text', location: 'text', description: 'text' });
+propertySchema.index(
+  { title: 'text', location: 'text', description: 'text', price: 1 }
+);
 
 var Property = mongoose.model('Property', propertySchema);
 

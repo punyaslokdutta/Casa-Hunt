@@ -2,19 +2,36 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3000';
+export const fetchHouses = createAsyncThunk('houses/fetchProperties', async (_, { getState }) => {
+  try {
+    const { searchTerm, minPrice, maxPrice, location } = getState().houses.filters;
 
-export const fetchHouses = createAsyncThunk('houses/fetchProperties', async (searchTerm) => {
-  try{
-    const url = searchTerm
-    ? `${BASE_URL}/v1/properties?searchTerm=${encodeURIComponent(searchTerm)}`
-    : `${BASE_URL}/v1/properties`;
+    // Construct URL based on filters
+    let url = `${BASE_URL}/v1/properties`;
+    url = applySearchFilter(url, searchTerm);
+    url = applyPriceFilter(url, minPrice, maxPrice);
+    url = applyLocationFilter(url, location);
 
-  const response = await axios.get(url);
-  return response.data;
+    // Make the API request
+    const response = await axios.get(url);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
   }
-  catch(err){console.log(err)};
-  
 });
+
+// Helper function to apply search filter
+const applySearchFilter = (url, searchTerm) => {
+  return searchTerm ? `${url}?searchTerm=${encodeURIComponent(searchTerm)}` : url;
+};
+
+
+
+// Helper function to apply location filter
+const applyLocationFilter = (url, location) => {
+  return location ? `${url}${url.includes('?') ? '&' : '?'}location=${encodeURIComponent(location)}` : url;
+};
 
 
 const housesSlice = createSlice({
@@ -23,8 +40,28 @@ const housesSlice = createSlice({
     houses: [],
     status: 'idle',
     error: null,
+    filters: {
+      searchTerm: null,
+      minPrice: null,
+      maxPrice: null,
+      location: null,
+    },
   },
-  reducers: {},
+  reducers: {
+    // Action to update search term filter
+    updateSearchTerm: (state, action) => {
+      state.filters.searchTerm = action.payload;
+    },
+    // Action to update price range filter
+    updatePriceRange: (state, action) => {
+      state.filters.minPrice = action.payload.minPrice;
+      state.filters.maxPrice = action.payload.maxPrice;
+    },
+    // Action to update location filter
+    updateLocation: (state, action) => {
+      state.filters.location = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchHouses.pending, (state) => {
@@ -41,4 +78,6 @@ const housesSlice = createSlice({
   },
 });
 
+export const { updateSearchTerm, updatePriceRange, updateLocation } = housesSlice.actions;
 export default housesSlice.reducer;
+
