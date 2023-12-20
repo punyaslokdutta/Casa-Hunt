@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
+import { updateSearchTerm } from '../../Redux/Reducers/houseSlice';
 import { fetchHouses } from '../../Redux/Reducers/houseSlice';
 
 const Search = () => {
@@ -7,7 +8,8 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleSearch = () => {
-    dispatch(fetchHouses(searchTerm));
+    dispatch(updateSearchTerm(searchTerm));
+    dispatch(fetchHouses())
   };
 
   return (

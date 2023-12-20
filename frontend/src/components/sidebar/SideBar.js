@@ -8,7 +8,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../Redux/Reducers/authSlice';
 import Search from './Search';
-
+import PriceFilter from './PriceFilter';
+  
 const SideBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,11 +45,9 @@ const SideBar = () => {
 
   return (
     <div>
-      {/* <button type="button" onClick={handleClick}>
-        Menu
-      </button> */}
       <div className="menu">
         <div className="logo">Casa-Hunt</div>
+        <div className="content-wrapper"><PriceFilter/></div>
         <Search/>
         <ul>
           {navLinks.map(({ url, name }) => (

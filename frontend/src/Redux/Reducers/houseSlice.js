@@ -25,9 +25,9 @@ export const fetchHouses = createAsyncThunk('houses/fetchProperties', async (_, 
 const applySearchFilter = (url, searchTerm) => {
   return searchTerm ? `${url}?searchTerm=${encodeURIComponent(searchTerm)}` : url;
 };
-
-
-
+const applyPriceFilter = (url, minPrice, maxPrice) => {
+  return maxPrice !== null ? `${url}${url.includes('?') ? '&' : '?'}maxPrice=${encodeURIComponent(maxPrice)}` : url;
+};
 // Helper function to apply location filter
 const applyLocationFilter = (url, location) => {
   return location ? `${url}${url.includes('?') ? '&' : '?'}location=${encodeURIComponent(location)}` : url;
@@ -48,14 +48,13 @@ const housesSlice = createSlice({
     },
   },
   reducers: {
-    // Action to update search term filter
     updateSearchTerm: (state, action) => {
       state.filters.searchTerm = action.payload;
     },
     // Action to update price range filter
-    updatePriceRange: (state, action) => {
-      state.filters.minPrice = action.payload.minPrice;
-      state.filters.maxPrice = action.payload.maxPrice;
+    updateMaxPrice: (state, action) => {
+      //state.filters.minPrice = action.payload.minPrice;
+      state.filters.maxPrice = action.payload;
     },
     // Action to update location filter
     updateLocation: (state, action) => {
@@ -78,6 +77,6 @@ const housesSlice = createSlice({
   },
 });
 
-export const { updateSearchTerm, updatePriceRange, updateLocation } = housesSlice.actions;
+export const { updateSearchTerm, updateMaxPrice, updateLocation } = housesSlice.actions;
 export default housesSlice.reducer;
 
