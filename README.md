@@ -1,14 +1,16 @@
 # Casa-Hunt
 Real Estate Data Management System
 
-<img width="1433" alt="Screenshot 2023-12-18 at 5 14 17 PM" src="https://github.com/punyaslokdutta/Casa-Hunt/assets/13198518/ea3ce355-8ea2-46ff-9a0e-c85e9bea1625">
+![MixCollage-20-Dec-2023-06-35-PM-7168](https://github.com/waylaidwanderer/DotaBuddy/assets/13198518/d1ffedba-06c8-4d65-a49a-dc228093c230)
+
 
 ## Frontend
 
 1. Page for GET Listings (Done)
 2. Page for GET individual listing (Done)
-3. Filter & Full text search (in Progress)
-4. Google Maps for finding Nearby Properties (TBD)
+3. Filter & Full text search (in Progress) - BUG : Filter & 
+4. Google Maps for finding Nearby Properties (in Progress)
+5. State management using Redux(for filters , List<Houses> ..) (Done)
 
 <!-- Filter can be done on Price & Location
 Full text search only on title/name  -->
@@ -18,7 +20,9 @@ Full text search only on title/name  -->
 
 1. GET /v1/properties: Get a list of all properties. (Done)
 2. GET /v1/properties/:id: Get details of a specific property. (Done)
-3. GET /v1/search/properties (For search and Filter) (Refactoring to be done)
+3. GET /v1/search/properties&searchTerm=x&maxPrice=1000000 : Search & Price Filter
+(For full text search , indexing on location, desc, title is done, for production use cases ES reverse indexes can be used)
+4. POST v1/auth/login (Auth Flow)
 
 ## Running the Backend 
 
