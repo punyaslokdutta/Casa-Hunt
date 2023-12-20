@@ -8,7 +8,7 @@ Real Estate Data Management System
 
 1. Page for GET Listings (Done)
 2. Page for GET individual listing (Done)
-3. Filter & Full text search (in Progress) - BUG : Filter & 
+3. Filter & Full text search (in Progress) - BUG : Filter & Full text bug
 4. Google Maps for finding Nearby Properties (in Progress)
 5. State management using Redux(for filters , List<Houses> ..) (Done)
 
@@ -23,6 +23,7 @@ Full text search only on title/name  -->
 3. GET /v1/search/properties&searchTerm=x&maxPrice=1000000 : Search & Price Filter
 (For full text search , indexing on location, desc, title is done, for production use cases ES reverse indexes can be used)
 4. POST v1/auth/login (Auth Flow)
+5. POST & PATCH v1/properties (Authenticated Admin Routes for adding and updating properties)
 
 ### Running the Backend 
 
@@ -53,3 +54,14 @@ This will serve endpoints at PORT : 3001
 2. Config & Environment variables
 3. Docker & Deployment -> AWS ECS (Infra)
 4. Error & Exception Monitoring (Sentry/LogRocket)
+
+### Top 5 features of competitors
+
+1. CRM for realtors (Leads generation from Ads/Marketing efforts)
+2. AI tool for preparing documents/price negotiation etc (Requirements not clear)
+3. Lead Generation -> Know location -> Automated Send Mail Flyers -> Market Insights (Property Base)
+4. One place Collaboration with Agents & Buyers.
+5. Document Tracking for Buyers
+
+
+
