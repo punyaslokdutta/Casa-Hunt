@@ -16,7 +16,7 @@ Real Estate Data Management System
 Full text search only on title/name  -->
 
 
-## Backend Endpoints
+### Backend Endpoints
 
 1. GET /v1/properties: Get a list of all properties. (Done)
 2. GET /v1/properties/:id: Get details of a specific property. (Done)
@@ -24,7 +24,7 @@ Full text search only on title/name  -->
 (For full text search , indexing on location, desc, title is done, for production use cases ES reverse indexes can be used)
 4. POST v1/auth/login (Auth Flow)
 
-## Running the Backend 
+### Running the Backend 
 
 1. Open your terminal.
 2. Change directory to the backend folder:
@@ -36,7 +36,7 @@ Full text search only on title/name  -->
    ```
 This will serve endpoints at PORT : 3000
 
-## Running the Frontend 
+### Running the Frontend 
 
 1. Change directory to the backend folder:
    
@@ -47,4 +47,9 @@ This will serve endpoints at PORT : 3000
    ```
 This will serve endpoints at PORT : 3001
 
+### Dev advancements
 
+1. Async logging winston (log event stream into Splunk / Hadoop)
+2. Config & Environment variables
+3. Docker & Deployment -> AWS ECS (Infra)
+4. Error & Exception Monitoring (Sentry/LogRocket)
